@@ -3,16 +3,16 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: TestApp
+  name: testapp-deploy
 spec:
   replicas: 1  # Number of desired replicas
   selector:
     matchLabels:
-      app: TestApp
+      app: testapp
   template:
     metadata:
       labels:
-        app: TestApp
+        app: testapp
     spec:
       containers:
       - name: asp-testapp
@@ -25,10 +25,10 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: TestApp
+  name: testapp-svc
 spec:
   selector:
-    app: TestApp
+    app: testapp
   ports:
     - protocol: TCP
       port: 80
