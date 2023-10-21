@@ -1,0 +1,36 @@
+---
+# Deployment
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: TestApp
+spec:
+  replicas: 1  # Number of desired replicas
+  selector:
+    matchLabels:
+      app: TestApp
+  template:
+    metadata:
+      labels:
+        app: TestApp
+    spec:
+      containers:
+      - name: asp-testapp
+        image: cuauhcodes/cuauh_codes_repo:latest  # Replace with your Docker image
+        ports:
+        - containerPort: 80
+
+---
+# Service
+apiVersion: v1
+kind: Service
+metadata:
+  name: aspnet-core-service
+spec:
+  selector:
+    app: TestApp
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 80
+  type: LoadBalancer
